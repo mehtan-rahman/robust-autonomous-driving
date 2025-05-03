@@ -19,18 +19,18 @@ def setup_environment():
     sys.path.append("/root/.local/lib/python3.11/site-packages")
 
     # Clone rl-agents repo
-    os.system("cd /content && rm -rf rl-agents")
-    os.system("cd /content && git clone --depth=1 https://github.com/eleurent/rl-agents.git")
+    os.system("cd content && rm -rf rl-agents")
+    os.system("cd content && git clone --depth=1 https://github.com/eleurent/rl-agents.git")
 
     # Patch logger.py
-    logger_path = Path("/content/rl-agents/rl_agents/trainer/logger.py")
+    logger_path = Path("content/rl-agents/rl_agents/trainer/logger.py")
     logger_text = logger_path.read_text()
     logger_text = logger_text.replace("gym_level=gym.logger.INFO", "gym_level=__import__('logging').INFO")
     logger_lines = [line for line in logger_text.splitlines() if "gym.logger.set" not in line]
     logger_path.write_text("\n".join(logger_lines))
 
     # Patch evaluation.py
-    eval_path = Path("/content/rl-agents/rl_agents/trainer/evaluation.py")
+    eval_path = Path("content/rl-agents/rl_agents/trainer/evaluation.py")
     eval_text = eval_path.read_text()
     eval_text = eval_text.replace("np.infty", "np.inf")
     eval_text = eval_text.replace(
@@ -60,11 +60,11 @@ def capped_cubic_video_schedule(episode_id):
     # Set up video display tools
     os.system("pip install -q pyvirtualdisplay")
     os.system("apt-get -y install xvfb ffmpeg")
-    os.system("cd /content && git clone https://github.com/Farama-Foundation/HighwayEnv.git 2> /dev/null")
+    os.system("cd content && git clone https://github.com/Farama-Foundation/HighwayEnv.git 2> /dev/null")
 
     # Add paths to rl-agents and scripts
-    sys.path.append("/content/rl-agents")
-    sys.path.append("/content/HighwayEnv/scripts")
+    sys.path.append("content/rl-agents")
+    sys.path.append("content/HighwayEnv/scripts")
 
     # Set random seeds for reproducibility
     import random

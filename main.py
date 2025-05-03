@@ -25,12 +25,6 @@ from planners.extensions.hierarchical import HierarchicalHybridPlanner
 from planners.extensions.policy_conditioned import QNetDrop, PolicyConditionedUncPlanner, train_q_network
 
 
-def setup():
-    """Set up the environment and dependencies"""
-    setup_environment()
-    print("Setup complete!")
-
-
 def run_drop_planner():
     """Run and evaluate the Deterministic Robust Optimistic Planning algorithm"""
     print("\n=== Running DROP Planner ===")
@@ -229,9 +223,6 @@ def compare_results(results):
 
 
 if __name__ == "__main__":
-    # Setup the environment
-    setup()
-
     # Create output directories
     os.makedirs("videos_drop", exist_ok=True)
     os.makedirs("videos_interval", exist_ok=True)
