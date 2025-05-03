@@ -7,7 +7,6 @@ import os
 import inspect
 from base64 import b64encode
 from IPython.display import HTML, display
-from utils import record_videos
 
 
 def show_latest_video(path="videos"):
